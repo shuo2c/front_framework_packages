@@ -1,13 +1,3 @@
-### 入门指南
+# main 基础项目
 
-##### 文件讲解
-- .vscode
-- .browserslistrc
-- .eslintrc.js
-- .gitignore
-- .npmrc
-- babel.config.js
-- lint-staged.config.js
-- tsconfig.json
-
-##### 依赖讲解
+##### vue2.7 + webpack + JavaScript
