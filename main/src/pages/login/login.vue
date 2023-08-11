@@ -1,56 +1,58 @@
 <template>
-  <div class="login">
+  <div class="login h-full w-full">
+    <wallpaper :sourceList="sourceList"></wallpaper>
     <!--登录内容区域-->
-    <div class="content">
-      <div class="left">
-        <div class="buttons-group">
-          <el-button :class="{ no_active: !isLogin }" type="text" @click="switchLoginMethod(true)">密码登录</el-button>
-          <el-button :class="{ no_active: isLogin }" type="text" @click="switchLoginMethod(false)">注册账户</el-button>
+    <div class="container h-full w-full">
+      <div class="content">
+        <div class="login-registry-buttons">
+          <lightButton style="margin-right: 6px" @click.native="switchLoginMethod(true)">密码登录</lightButton>
+          <lightButton @click.native="switchLoginMethod(false)">注册账户</lightButton>
         </div>
-        <el-form ref="loreg" label-width="0px" :model="form" :rules="rules">
-          <el-form-item label="" prop="phone">
-            <el-input v-model="form.phone" placeholder="手机号" />
-          </el-form-item>
-          <el-form-item v-if="!isLogin" label="" prop="verCode">
-            <el-input v-model="form.verCode" placeholder="请输入6位数验证码">
-              <template slot="append"
-                ><span @click="getCode">{{
-                  vertCode.setIntervalCode ? `${vertCode.wait} 可重新发送` : '获取验证码'
-                }}</span></template
-              >
-            </el-input>
-          </el-form-item>
-          <el-form-item label="" prop="password">
-            <el-input v-model="form.password" placeholder="密码" :type="ciphertext ? 'password' : 'text'">
-              <i
-                slot="suffix"
-                class="el-input__icon el-icon-view"
-                @mousedown="ciphertext = false"
-                @mouseup="ciphertext = true"
-              ></i>
-            </el-input>
-          </el-form-item>
-          <el-form-item v-if="!isLogin" label="" prop="confirmPasswd">
-            <el-input v-model="form.confirmPasswd" placeholder="确认密码" :type="ciphertext ? 'password' : 'text'">
-              <i
-                slot="suffix"
-                class="el-input__icon el-icon-view"
-                @mousedown="ciphertext = false"
-                @mouseup="ciphertext = true"
-              ></i>
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button style="margin-right: 16px" type="primary" @click="loginRegister">{{
-              isLogin ? '登录' : '登录/注册'
-            }}</el-button>
-            <!-- <el-checkbox v-model="form.remberMe">
-              记住我<span class="remember-me">不是自己的电脑不要勾选此项</span>
-            </el-checkbox> -->
-          </el-form-item>
-        </el-form>
+        <div class="login-registry-form">
+          <el-form ref="loreg" label-width="0px" :model="form" :rules="rules">
+            <!--没有本质作用近作用域隐藏自动带入-->
+            <input autocomplete="new-password" name="password" style="display: none" type="password" />
+
+            <el-form-item key="phone" label="" prop="phone">
+              <el-input v-model="form.phone" autocomplete="off" placeholder="手机号" />
+            </el-form-item>
+            <el-form-item v-if="!isLogin" key="verCode" label="" prop="verCode">
+              <el-input v-model="form.verCode" autocomplete="off" placeholder="请输入6位数验证码">
+                <template slot="append"
+                  ><span @click="getCode">{{
+                    vertCode.setIntervalCode ? `${vertCode.wait} 可重新发送` : '获取验证码'
+                  }}</span></template
+                >
+              </el-input>
+            </el-form-item>
+            <el-form-item key="password" label="" prop="password">
+              <el-input v-model="form.password" placeholder="密码" :type="ciphertext ? 'password' : 'text'">
+                <i
+                  slot="suffix"
+                  class="el-input__icon el-icon-view"
+                  @mousedown="ciphertext = false"
+                  @mouseup="ciphertext = true"
+                ></i>
+              </el-input>
+            </el-form-item>
+            <el-form-item v-if="!isLogin" key="conformPasswd" label="" prop="confirmPasswd">
+              <el-input v-model="form.confirmPasswd" placeholder="确认密码" :type="ciphertext ? 'password' : 'text'">
+                <i
+                  slot="suffix"
+                  class="el-input__icon el-icon-view"
+                  @mousedown="ciphertext = false"
+                  @mouseup="ciphertext = true"
+                ></i>
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <lightButton class="cus-login-button" @click.native="loginRegister">{{
+                isLogin ? '登录' : '登录/注册'
+              }}</lightButton>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
-      <div class="right"></div>
     </div>
 
     <!--隐藏备案号-->
@@ -67,11 +69,28 @@ import { loginUser, registryUser } from './request'
 import { formCheck } from './config.js'
 import { mapMutations } from 'vuex'
 import { setLocalStorageValue } from '@/common/utils/localStorage'
+import wallpaper from '@/components/wallpaper'
+import lightButton from '@/components/buttons/light-button'
 export default {
   name: 'login',
+  components: {
+    wallpaper,
+    lightButton,
+  },
   data() {
     const { phone, verCode, password, confirmPasswd } = formCheck(this)
     return {
+      sourceList: [
+        // {
+        //   url: '@/components/wallpaper/video/dol.mp4',
+        //   poster: '@/components/wallpaper/video/dol_img.jpg',
+        // },
+        {
+          url: 'https://video.wetab.link/wallpaper-dynamic/v1gtq6eschkd9lx7mdtcoz6gvflb.mp4',
+          poster:
+            'https://video.wetab.link/wallpaper-dynamic/v1gtq6eschkd9lx7mdtcoz6gvflb.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_0,h_0,m_fast',
+        },
+      ],
       // 登录注册form
       form: {
         phone: '',
@@ -142,61 +161,42 @@ export default {
 
 <style scoped lang="less">
 .login {
-  width: 100%;
-  height: 100vh;
-  background: url(./source/bgc.png) no-repeat;
-  background-size: cover;
-  background-color: #e0e3ed;
-  background-color: #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .content {
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 24px;
+  .container {
+    flex-direction: column;
     display: flex;
-    width: calc(100% - 360px);
-    height: calc(100% - 160px);
+    align-items: center;
+    justify-content: center;
+    .content {
+      width: 450px;
+      height: 360px;
+      .login-registry-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+      }
 
-    .right {
-      height: 100%;
-      background: url(./source/bgc2.png) no-repeat;
-      background-color: #c0c4cc;
-      background-size: cover;
-      border-right: 1px solid #ddd;
-      border-top-right-radius: 24px;
-      border-bottom-right-radius: 24px;
-    }
-
-    .left {
-      width: calc(100% / 2);
-      flex-shrink: 0;
-      flex: 0.8;
-      height: 100%;
-      padding-left: 24px;
-
-      .buttons-group {
-        margin-bottom: 15px;
-
-        .no_active {
-          color: #c0c4cc;
+      .login-registry-form {
+        ::v-deep .el-input__inner {
+          background: rgba(0, 0, 0, 0.43) !important;
+          color: #dbe0e1 !important;
+          border: 1px solid rgba(138, 138, 138, 0.24);
         }
-      }
 
-      .remember-me {
-        display: inline-block;
-        margin-left: 12px;
-        color: #bbb;
-      }
+        ::v-deep .el-input-group__append {
+          background: none;
+          border: 1px solid rgba(138, 138, 138, 0.24);
+        }
 
-      /deep/ .el-input__icon {
-        cursor: pointer;
-      }
-
-      /deep/ .el-input-group__append {
-        cursor: pointer;
+        box-sizing: border-box;
+        padding: 32px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.24);
+        border-radius: 25px;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+        .cus-login-button {
+          box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+        }
       }
     }
   }
