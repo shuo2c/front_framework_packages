@@ -81,10 +81,10 @@ export default {
     const { phone, verCode, password, confirmPasswd } = formCheck(this)
     return {
       sourceList: [
-        // {
-        //   url: '@/components/wallpaper/video/dol.mp4',
-        //   poster: '@/components/wallpaper/video/dol_img.jpg',
-        // },
+        {
+          url: '/video/dol.mp4',
+          poster: '/video/dol_img.jpg',
+        },
         {
           url: 'https://video.wetab.link/wallpaper-dynamic/v1gtq6eschkd9lx7mdtcoz6gvflb.mp4',
           poster:

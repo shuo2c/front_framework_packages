@@ -2,21 +2,9 @@
   <div class="pedestal">
     <!--这是布局的模板, 用于基座之间的布局-->
     <div class="cus-layout">
-      <header class="header">
-        <span class="title">Tadpoles</span>
-        <span class="userinfo">
-          <el-dropdown class="operation" trigger="click" @command="menuClick">
-            <span class="el-dropdown-link">{{ user.nickname }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="login_out" icon="el-icon-edit-outline">退出登录</el-dropdown-item>
-              <el-dropdown-item command="user_info" icon="el-icon-user-solid">个人信息</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </span>
-      </header>
-      <section class="container">
-        <div class="left-menu">
-          <el-menu class="el-menu-vertical" default-active="/qiankun" router>
+      <div class="left-menu">
+        <TelescopeMenu></TelescopeMenu>
+        <!-- <el-menu class="el-menu-vertical" default-active="/qiankun" router>
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-monitor"></i>
@@ -44,9 +32,28 @@
               <i class="el-icon-menu"></i>
               <span slot="title">Sub-Html</span>
             </el-menu-item>
-          </el-menu>
+          </el-menu> -->
+      </div>
+
+      <section class="container">
+        <header class="header">
+          <span class="title">Tadpoles</span>
+          <span class="userinfo">
+            <el-dropdown class="operation" trigger="click" @command="menuClick">
+              <span class="el-dropdown-link"
+                >{{ user.nickname }}<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="login_out" icon="el-icon-edit-outline">退出登录</el-dropdown-item>
+                <el-dropdown-item command="user_info" icon="el-icon-user-solid">个人信息</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
+        </header>
+
+        <div class="content">
+          <router-view />
         </div>
-        <div class="content"><router-view /></div>
       </section>
     </div>
   </div>
@@ -54,9 +61,13 @@
 
 <script>
 import { removeLocalStorageValue } from '@/common/utils/localStorage'
+import TelescopeMenu from '@/components/menu/telescop-menu'
 import { mapGetters } from 'vuex'
 export default {
   name: 'layout',
+  components: {
+    TelescopeMenu,
+  },
   computed: {
     ...mapGetters('account', {
       user: 'getUserInfo',
@@ -92,58 +103,34 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: 100vh;
-  .header {
-    z-index: 99;
-    position: fixed;
-    box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 1280px;
-    height: 48px;
-    padding: 0px 64px 0px 20px;
-    line-height: 48px;
-    background-color: #fdfdfd;
-    box-shadow: 0 1px 4px 0 rgba(158, 154, 154, 0.3);
-    .userinfo {
-      float: right;
-      .operation {
-        cursor: pointer;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: row;
+
   .container {
-    padding-top: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
     width: 100%;
-    height: calc(100% - 50px);
-    .left-menu {
+    height: 100%;
+
+    .header {
       box-sizing: border-box;
-      position: fixed;
-      width: 150px;
-      border-right: 1px solid #ecf5ff;
-
-      /deep/ .el-submenu__title {
-        line-height: 50px;
-        height: 50px;
-      }
-      /deep/ .el-submenu .el-menu-item {
-        height: 40px;
-        line-height: 40px;
-        padding: 0 45px;
-        min-width: 150px;
+      width: 100%;
+      min-width: 1280px;
+      height: 48px;
+      padding: 0px 64px 0px 20px;
+      line-height: 48px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 1px 4px 0 rgba(158, 154, 154, 0.2);
+      .userinfo {
+        float: right;
+        .operation {
+          cursor: pointer;
+        }
       }
     }
+
     .content {
-      height: 100%;
-      width: calc(100% - 150px);
-      padding-left: 150px;
-    }
-
-    .el-menu {
-      border-right: none;
+      height: calc(100% - 50px);
+      overflow-y: scroll;
+      width: 100%;
     }
   }
 }

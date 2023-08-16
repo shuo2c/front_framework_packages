@@ -77,10 +77,10 @@ export default {
 
 <style lang="less" scoped>
 .link_card {
-  background: #fafafa;
+  background: #ffffff;
   box-sizing: border-box;
   width: 100%;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #f5f7fa;
   padding: 4px 8px;
   cursor: pointer;
   &:hover {

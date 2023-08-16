@@ -13,18 +13,20 @@
     </div>
 
     <!--personalityBlock区域-->
-    <cardList
-      v-for="(item, index) in personalityBlock"
-      :id="item.id"
-      :key="index"
-      :block="item"
-      @delteBlock="delteBlock"
-      @updateBlock="
-        data => {
-          showBlockDialog(false, data)
-        }
-      "
-    ></cardList>
+    <div class="card_list">
+      <cardList
+        v-for="(item, index) in personalityBlock"
+        :id="item.id"
+        :key="index"
+        :block="item"
+        @delteBlock="delteBlock"
+        @updateBlock="
+          data => {
+            showBlockDialog(false, data)
+          }
+        "
+      ></cardList>
+    </div>
 
     <!--无block块数据-->
     <div v-if="personalityBlock.length === 0" class="nothing_block_list">
@@ -145,10 +147,14 @@ export default {
 
 <style lang="less" scoped>
 .custom_block {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #f5f7fa;
+  // box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
   .block_operation {
     font-size: 20px;
-    background: #fff;
-    padding: 8px 12px 0px;
+    padding: 12px;
+
     .el_icon {
       margin-right: 8px;
       color: #909399;
@@ -169,6 +175,13 @@ export default {
       font-weight: bold;
       color: #fff;
     }
+  }
+
+  .card_list {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    overflow-x: scroll;
   }
 }
 .custom_block .nothing_block_list {

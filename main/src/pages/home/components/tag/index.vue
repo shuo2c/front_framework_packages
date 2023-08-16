@@ -169,7 +169,7 @@ export default {
 .tag_line {
   .operation {
     box-sizing: border-box;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #f5f7fa;
     margin-bottom: 12px;
     height: 32px;
     line-height: 32px;
