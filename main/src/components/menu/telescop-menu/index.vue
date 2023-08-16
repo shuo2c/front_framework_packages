@@ -92,6 +92,12 @@ export default {
 <style lang="less" scoped>
 .telescope-menu {
   .expand {
+    .icon {
+      width: 250px !important;
+      .icon-con {
+        display: block !important;
+      }
+    }
     .line {
       width: 230px !important;
     }
@@ -114,9 +120,9 @@ export default {
     color: #fff;
     width: 110px;
     height: calc(100vh);
-    background: rgba(0, 0, 0, 0.8);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    background: rgba(39, 48, 79, 0.8);
+    // border-top-right-radius: 20px;
+    // border-bottom-right-radius: 20px;
     overflow: hidden;
     transition: 0.5s;
 
@@ -144,7 +150,6 @@ export default {
       }
     }
     .icon {
-      width: 250px;
       height: 60px;
       margin-left: 25px;
       margin-top: 20px;
@@ -164,6 +169,7 @@ export default {
         }
       }
       .icon-con {
+        display: none;
         height: 60px;
         margin-left: 25px;
         p {
