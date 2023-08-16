@@ -1,20 +1,20 @@
 <template>
   <div class="list_crad">
-    <div style="max-height: 630px; overflow-y: auto">
+    <div style="max-height: 100%; overflow-y: auto">
       <div class="list_block_title">
         <div class="left">
-          <span class="title">{{ block.title }}</span>
-          <span class="description">{{ block.description }}</span>
+          <div class="title">{{ block.title }}</div>
+          <div class="description">{{ block.description }}</div>
         </div>
         <div class="right">
-          <el-dropdown trigger="click" @command="menuClick">
+          <!-- <el-dropdown trigger="click" @command="menuClick">
             <span class="el-dropdown-link">更多<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="add" icon="el-icon-plus">新增书签</el-dropdown-item>
               <el-dropdown-item command="updateBlock" icon="el-icon-edit">更新块信息</el-dropdown-item>
               <el-dropdown-item command="delBlock" icon="el-icon-delete">删除块信息</el-dropdown-item>
             </el-dropdown-menu>
-          </el-dropdown>
+          </el-dropdown> -->
         </div>
       </div>
       <div class="list_block_content">
@@ -131,7 +131,7 @@ export default {
               this.$message.warning(err.message)
             })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
   },
 }
@@ -143,42 +143,39 @@ export default {
   margin-right: 12px;
   width: calc(100% / 4 - 8px);
   flex-shrink: 0;
-  padding: 12px;
-  background: #f5f7fa;
+  padding: 20px 12px 35px;
+  // background: #f5f7fa;
+  background: rgba(30, 36, 51, 0.1);
   border-radius: 8px;
   min-width: 300px;
+  padding-top: 20px;
+
   .list_block_title {
-    display: flex;
-    justify-content: space-between;
     padding-bottom: 8px;
-    .left span {
-      display: inline-block;
-      margin-right: 25px;
-    }
+    height: 72px;
+
     .left .title {
       font-size: 16px;
       font-weight: bold;
+      margin-bottom: 6px;
     }
+
     .left .description {
       color: #a1a7b7;
+      margin-bottom: 6px;
     }
-    .right {
-      width: 60px;
-      flex-shrink: 0;
-      /deep/ .el-dropdown-link {
-        color: #909399;
-        cursor: pointer;
-        font-size: 13px;
-        font-weight: bold;
-      }
-    }
+
+    .right {}
   }
+
   .list_block_content {
     display: flex;
     flex-flow: wrap;
   }
+
   .empty_desc {
     color: #a1a7b7;
+
     .create_button {
       color: #409eff;
       cursor: pointer;

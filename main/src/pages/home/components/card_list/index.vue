@@ -20,11 +20,10 @@
         :key="index"
         :block="item"
         @delteBlock="delteBlock"
-        @updateBlock="
-          data => {
-            showBlockDialog(false, data)
-          }
-        "
+        @updateBlock="data => {
+          showBlockDialog(false, data)
+        }
+          "
       ></cardList>
     </div>
 
@@ -139,7 +138,7 @@ export default {
               this.$message.warning(err.message)
             })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
   },
 }
@@ -147,9 +146,11 @@ export default {
 
 <style lang="less" scoped>
 .custom_block {
+  height: 100%;
   background: #fff;
   border-radius: 12px;
   border: 1px solid #f5f7fa;
+
   // box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
   .block_operation {
     font-size: 20px;
@@ -159,10 +160,12 @@ export default {
       margin-right: 8px;
       color: #909399;
       cursor: pointer;
+
       &:hover {
         color: #409eff;
       }
     }
+
     .block_anchor {
       white-space: nowrap;
       text-decoration-line: none;
@@ -180,16 +183,21 @@ export default {
   .card_list {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     padding: 12px;
     overflow-x: scroll;
+    height: calc(100% - 120px)
   }
 }
+
 .custom_block .nothing_block_list {
   background: #fff;
   min-height: 380px;
+
   /deep/ .el-empty__description {
     display: none;
   }
+
   /deep/ .el-empty__bottom {
     margin-top: 0px;
     font-size: 13px;

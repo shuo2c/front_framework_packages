@@ -94,21 +94,26 @@ export default {
   .expand {
     .icon {
       width: 250px !important;
+
       .icon-con {
         display: block !important;
       }
     }
+
     .line {
       width: 230px !important;
     }
+
     .con {
       width: 160px !important;
       opacity: 1 !important;
     }
+
     .ricon {
       width: 60px !important;
       opacity: 1 !important;
     }
+
     .serve,
     .menu {
       width: 230px !important;
@@ -116,11 +121,12 @@ export default {
 
     width: 280px !important;
   }
+
   .nav {
     color: #fff;
     width: 110px;
     height: calc(100vh);
-    background: rgba(39, 48, 79, 0.8);
+    background: rgba(30, 36, 51, 0.8);
     // border-top-right-radius: 20px;
     // border-bottom-right-radius: 20px;
     overflow: hidden;
@@ -134,26 +140,32 @@ export default {
       justify-content: space-around;
       margin-left: 25px;
       margin-top: 25px;
+
       .btn-item {
         width: 10px;
         height: 10px;
         border-radius: 50%;
+
         &:nth-child(1) {
           background: #eb5a56;
         }
+
         &:nth-child(2) {
           background: #f8bc33;
         }
+
         &:nth-child(3) {
           background: #62cb44;
         }
       }
     }
+
     .icon {
       height: 60px;
       margin-left: 25px;
       margin-top: 20px;
       display: flex;
+
       .icon-img {
         width: 60px;
         height: 60px;
@@ -161,6 +173,7 @@ export default {
         border-radius: 50%;
         border: 4px solid rgba(255, 255, 255, 0.3);
         overflow: hidden;
+
         img {
           width: 100%;
           height: 100%;
@@ -168,20 +181,24 @@ export default {
           object-fit: cover;
         }
       }
+
       .icon-con {
         display: none;
         height: 60px;
         margin-left: 25px;
+
         p {
           padding-top: 5px;
           margin: 0px;
         }
+
         h2 {
           font-weight: 400;
           margin: 0px;
         }
       }
     }
+
     .line {
       width: 60px;
       height: 1px;
@@ -189,31 +206,38 @@ export default {
       margin: 20px 25px;
       transition: 0.5s;
     }
+
     .title {
       width: 60px;
       margin-left: 25px;
       margin-bottom: 20px;
+
       p {
         font-size: 14px;
         margin: 0px;
       }
     }
+
     .menu,
     .serve {
       width: 60px;
       margin-left: 25px;
       transition: 0.5s;
+
       .item {
         display: flex;
         position: relative;
         transition: 0.5s;
         border-radius: 6px;
+
         &:hover {
           background: rgba(255, 255, 255, 0.1);
+
           .light {
             opacity: 1;
           }
         }
+
         .light {
           width: 6px;
           height: 50px;
@@ -225,16 +249,19 @@ export default {
           border-bottom-right-radius: 4px;
           opacity: 0;
         }
+
         .licon {
           width: 60px;
           height: 50px;
           display: flex;
           justify-content: center;
           align-items: center;
+
           .iconfont {
             font-size: 22px;
           }
         }
+
         .con {
           width: 0px;
           height: 50px;
@@ -247,6 +274,7 @@ export default {
           left: -20px;
           opacity: 0;
         }
+
         .ricon {
           width: 0px;
           height: 50px;
@@ -256,6 +284,7 @@ export default {
           align-items: center;
           overflow: hidden;
           opacity: 0;
+
           .iconfont {
             font-size: 22px;
             color: #62cb44;
@@ -263,6 +292,7 @@ export default {
         }
       }
     }
+
     .serve {
       background: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
@@ -270,5 +300,4 @@ export default {
       transition: 0.5s;
     }
   }
-}
-</style>
+}</style>

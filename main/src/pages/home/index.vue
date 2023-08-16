@@ -35,8 +35,8 @@ export default {
   },
   computed: {},
   watch: {},
-  mounted() {},
-  destroyed() {},
+  mounted() { },
+  destroyed() { },
   methods: {
     // 导航标签改变触发的事件
     tagChange(tagInfo) {
@@ -62,6 +62,11 @@ export default {
     // box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
     border: 1px solid #f5f7fa;
   }
+
+  .custom_content {
+    height: calc(100% - 120px);
+  }
+
   .no_tag_images {
     margin-top: 100px;
   }
