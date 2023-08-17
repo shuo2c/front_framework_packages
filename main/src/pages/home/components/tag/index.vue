@@ -8,8 +8,8 @@
         class="el-icon-edit el_so_icon"
         @click="tagInputAction(false)"
       ></i>
-      <i v-if="Object.keys(currentTagObj).length > 0" class="el-icon-close el_so_icon" @click="delTag"></i>
-      <i class="el-icon-plus el_so_icon" @click="tagInputAction(true)"></i>
+      <i v-if="Object.keys(currentTagObj).length > 0" class="el-icon-remove el_so_icon" @click="delTag"></i>
+      <i class="el-icon-circle-plus el_so_icon" @click="tagInputAction(true)"></i>
 
       <el-input
         v-if="showAddTagInput"
@@ -174,16 +174,17 @@ export default {
     height: 32px;
     line-height: 32px;
     .el_so_title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-right: 8px;
+      font-size: 18px;
+      font-weight: 500;
+      margin-right: 16px;
+      letter-spacing: 4px;
     }
     .el_so_icon {
-      font-size: 14px;
-      font-weight: bold;
-      margin-right: 8px;
+      font-size: 18px;
+      font-weight: 300;
+      margin-right: 12px;
       cursor: pointer;
-      color: #909399;
+      color: #dcdfe6;
       &:hover {
         color: #409eff;
       }
@@ -191,9 +192,9 @@ export default {
     .tag_add_name {
       position: relative;
       top: -2px;
-      width: 225px;
+      width: 300px;
       /deep/ .el-input__inner {
-        padding-right: 62px;
+        padding-right: 75px;
         border: none;
         height: 28px;
         line-height: 28px;

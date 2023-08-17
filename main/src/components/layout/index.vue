@@ -109,6 +109,8 @@ export default {
   .container {
     width: 100%;
     height: 100%;
+    min-width: 1280px;
+    overflow-y: hidden;
 
     .header {
       box-sizing: border-box;
@@ -119,6 +121,12 @@ export default {
       line-height: 48px;
       background: rgba(255, 255, 255, 0.6);
       box-shadow: 0 1px 4px 0 rgba(158, 154, 154, 0.2);
+      .title {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: rgba(30, 36, 51, 0.8);
+      }
       .userinfo {
         float: right;
         .operation {
@@ -129,7 +137,6 @@ export default {
 
     .content {
       height: calc(100% - 50px);
-      overflow-y: scroll;
       width: 100%;
     }
   }

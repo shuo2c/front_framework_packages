@@ -54,3 +54,13 @@ body {
 .relative {
   position: relative;
 }
+
+
+/*-------------------------定义element-css----------------------*/
+.el-button-cus {
+ border-radius: 4px !important;
+ padding:8px 12px !important;
+ box-shadow: 0px 0px 4px 1px #ddd;
+ border: none !important;
+}
+

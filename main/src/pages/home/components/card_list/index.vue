@@ -2,8 +2,9 @@
   <div v-if="showCreateBlockOperation" class="custom_block">
     <!--块下按钮组-->
     <div class="block_operation">
-      <i class="el-icon-folder-add el_icon" @click="showBlockDialog(true)"></i>
-      <i class="el-icon-share el_icon"></i>
+      <div class="buttons">
+        <el-button class="el-button-cus" size="small" type="default" @click="showBlockDialog(true)">新增块</el-button>
+      </div>
       <!--所有块的锚点-->
       <div class="anchor_pointer">
         <template v-for="(item, index) in personalityBlock">
@@ -13,24 +14,26 @@
     </div>
 
     <!--personalityBlock区域-->
-    <div class="card_list">
+    <div v-if="personalityBlock.length > 0" class="card_list">
       <cardList
         v-for="(item, index) in personalityBlock"
         :id="item.id"
         :key="index"
         :block="item"
         @delteBlock="delteBlock"
-        @updateBlock="data => {
-          showBlockDialog(false, data)
-        }
-          "
+        @updateBlock="
+          data => {
+            showBlockDialog(false, data)
+          }
+        "
       ></cardList>
     </div>
 
     <!--无block块数据-->
     <div v-if="personalityBlock.length === 0" class="nothing_block_list">
       <el-empty :image-size="120">
-        <span>您还没有创建导航块，</span><el-button type="text" @click="showBlockDialog(true)">点击创建</el-button>
+        <span>您还没有创建导航块，</span
+        ><el-button size="small" type="text" @click="showBlockDialog(true)">点击创建</el-button>
       </el-empty>
     </div>
     <!--创建/编辑标签区域块的弹窗-->
@@ -138,7 +141,7 @@ export default {
               this.$message.warning(err.message)
             })
         })
-        .catch(() => { })
+        .catch(() => {})
     },
   },
 }
@@ -155,28 +158,27 @@ export default {
   .block_operation {
     font-size: 20px;
     padding: 12px;
-
-    .el_icon {
-      margin-right: 8px;
-      color: #909399;
-      cursor: pointer;
-
-      &:hover {
-        color: #409eff;
-      }
+    padding-bottom: 4px;
+    display: flex;
+    .buttons {
+      margin-right: 52px;
     }
 
     .block_anchor {
       white-space: nowrap;
       text-decoration-line: none;
       font-size: 12px;
-      padding: 2px 6px;
+      padding: 4px 8px;
       border-radius: 4px;
-      margin-right: 2px;
+      margin-right: 6px;
       cursor: pointer;
-      background: #6b7184;
+      background: #f8bc33;
+      box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
       font-weight: bold;
       color: #fff;
+      &:hover {
+        background: #cf9236;
+      }
     }
   }
 
@@ -186,7 +188,7 @@ export default {
     align-items: flex-start;
     padding: 12px;
     overflow-x: scroll;
-    height: calc(100% - 120px)
+    height: calc(100% - 80px);
   }
 }
 

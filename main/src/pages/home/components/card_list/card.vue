@@ -77,12 +77,13 @@ export default {
 
 <style lang="less" scoped>
 .link_card {
-  background: #ffffff;
   box-sizing: border-box;
   width: 100%;
-  border-bottom: 1px solid #f5f7fa;
+  background: #f5f7fa;
+  margin: 2px 0px;
   padding: 4px 8px;
   cursor: pointer;
+  border-radius: 8px;
   &:hover {
     background: #6b7184;
     .lk_head .card_head .title {
@@ -123,8 +124,10 @@ export default {
     .opeation {
       box-sizing: border-box;
       padding-top: 7px;
-      /deep/ .el-dropdown {
+
+      .el-dropdown-link {
         cursor: pointer;
+        font-size: 12px;
       }
     }
   }

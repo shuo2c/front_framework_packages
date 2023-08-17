@@ -1,43 +1,41 @@
 <template>
   <div class="list_crad">
-    <div style="max-height: 100%; overflow-y: auto">
-      <div class="list_block_title">
-        <div class="left">
-          <div class="title">{{ block.title }}</div>
-          <div class="description">{{ block.description }}</div>
-        </div>
-        <div class="right">
-          <!-- <el-dropdown trigger="click" @command="menuClick">
-            <span class="el-dropdown-link">更多<i class="el-icon-arrow-down el-icon--right"></i> </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="add" icon="el-icon-plus">新增书签</el-dropdown-item>
-              <el-dropdown-item command="updateBlock" icon="el-icon-edit">更新块信息</el-dropdown-item>
-              <el-dropdown-item command="delBlock" icon="el-icon-delete">删除块信息</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown> -->
-        </div>
+    <div class="list_block_title">
+      <div class="left">
+        <div class="title">{{ block.title }}</div>
+        <div class="description" :title="block.description">{{ block.description }}</div>
       </div>
-      <div class="list_block_content">
-        <template v-if="links.length > 0">
-          <template v-for="(item, index) in links">
-            <card :key="index" :cardInfo="item" @deleteLink="deleteLink" @editCardLink="editCardLink"></card>
-          </template>
-        </template>
-        <div v-else>
-          <p class="empty_desc">
-            快来添加个书签吧，<span class="create_button" @click="menuClick('add')">点击创建</span>
-          </p>
-        </div>
+      <div class="right">
+        <el-dropdown trigger="click" @command="menuClick">
+          <span class="el-dropdown-link">更多<i class="el-icon-arrow-down el-icon--right"></i> </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="add" icon="el-icon-plus">新增书签</el-dropdown-item>
+            <el-dropdown-item command="updateBlock" icon="el-icon-edit">更新块信息</el-dropdown-item>
+            <el-dropdown-item command="delBlock" icon="el-icon-delete">删除块信息</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
-      <!--创建书签的弹窗-->
-      <diaCradLink
-        v-if="dialogCeateLinkObj.show"
-        :block="block"
-        :card="dialogCeateLinkObj.card"
-        :visiable.sync="dialogCeateLinkObj.show"
-        @observeLink="observeLink"
-      ></diaCradLink>
     </div>
+    <div class="list_block_content">
+      <template v-if="links.length > 0">
+        <template v-for="(item, index) in links">
+          <card :key="index" :cardInfo="item" @deleteLink="deleteLink" @editCardLink="editCardLink"></card>
+        </template>
+      </template>
+      <div v-else>
+        <p class="empty_desc">
+          快来添加个书签吧，<span class="create_button" @click="menuClick('add')">点击创建</span>
+        </p>
+      </div>
+    </div>
+    <!--创建书签的弹窗-->
+    <diaCradLink
+      v-if="dialogCeateLinkObj.show"
+      :block="block"
+      :card="dialogCeateLinkObj.card"
+      :visiable.sync="dialogCeateLinkObj.show"
+      @observeLink="observeLink"
+    ></diaCradLink>
   </div>
 </template>
 
@@ -131,7 +129,7 @@ export default {
               this.$message.warning(err.message)
             })
         })
-        .catch(() => { })
+        .catch(() => {})
     },
   },
 }
@@ -143,16 +141,18 @@ export default {
   margin-right: 12px;
   width: calc(100% / 4 - 8px);
   flex-shrink: 0;
-  padding: 20px 12px 35px;
-  // background: #f5f7fa;
-  background: rgba(30, 36, 51, 0.1);
+  padding: 20px 8px 35px;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   min-width: 300px;
-  padding-top: 20px;
+  padding-top: 12px;
+  height: calc(100%);
 
   .list_block_title {
-    padding-bottom: 8px;
-    height: 72px;
+    padding-bottom: 6px;
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #f5f7fa;
 
     .left .title {
       font-size: 16px;
@@ -162,15 +162,29 @@ export default {
 
     .left .description {
       color: #a1a7b7;
-      margin-bottom: 6px;
+      height: 22px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .right {}
+    .right {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      .el-dropdown-link {
+        font-size: 12px;
+        cursor: pointer;
+        letter-spacing: 2px;
+      }
+    }
   }
 
   .list_block_content {
     display: flex;
     flex-flow: wrap;
+    max-height: calc(100% - 36px);
+    overflow-y: scroll;
   }
 
   .empty_desc {
