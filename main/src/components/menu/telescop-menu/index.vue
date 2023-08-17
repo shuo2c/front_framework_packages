@@ -18,52 +18,28 @@
 
       <div class="line"></div>
 
-      <div class="title">
-        <p>常用数据</p>
-      </div>
-      <div class="menu">
-        <div class="item">
-          <div class="light"></div>
-          <div class="licon">
-            <i class="el-icon-paperclip iconfont"></i>
+      <template v-for="(item, index) in menu">
+        <div :key="index">
+          <div class="title">
+            <p>{{ item.title }}</p>
           </div>
-          <div class="con">Vue</div>
-          <div class="ricon"></div>
+          <div :class="{ menu: true, serve: item.darkColor }">
+            <template v-for="(link, linkIndex) in item.groups">
+              <div
+                :key="linkIndex"
+                :class="{ item: true, active: currentPath === link.toPath }"
+                @click="goPages(link.toName, link.toPath)"
+              >
+                <div class="light"></div>
+                <div class="licon"><i :class="['iconfont', link.prefixIcon]"></i></div>
+                <div class="con">{{ link.title }}</div>
+                <div class="ricon"><i :class="[link.suffixIcon, 'iconfont']"></i></div>
+              </div>
+            </template>
+          </div>
+          <div v-if="index < menu.length - 1" class="line"></div>
         </div>
-        <div class="item">
-          <div class="light"></div>
-          <div class="licon">
-            <i class="el-icon-service iconfont"></i>
-          </div>
-          <div class="con">React</div>
-          <div class="ricon">
-            <i class="el-icon-edit iconfont"></i>
-          </div>
-        </div>
-        <div class="item">
-          <div class="light"></div>
-          <div class="licon">
-            <i class="el-icon-user iconfont"></i>
-          </div>
-          <div class="con">Payouts</div>
-          <div class="ricon"></div>
-        </div>
-      </div>
-
-      <div class="line"></div>
-      <div class="title">
-        <p>Sever 6</p>
-      </div>
-      <div class="serve">
-        <div class="item">
-          <div class="light"></div>
-          <div class="licon">
-            <i class="el-icon-user iconfont"></i>
-          </div>
-          <div class="con">Payouts</div>
-          <div class="ricon"></div>
-        </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
@@ -72,18 +48,26 @@
 import mmJpg from '@/components/menu/telescop-menu/mm.jpg'
 export default {
   name: 'TelescopeMenu',
+  props: {
+    menu: [],
+  },
   data() {
     return {
       mmJpg,
       expand: true,
+      currentPath: '',
     }
   },
   mounted() {
-    console.log(this.mmJpg)
+    this.currentPath = this.$route.path
   },
   methods: {
     expandOperation() {
       this.expand = !this.expand
+    },
+    goPages(name, path) {
+      this.currentPath = path
+      this.$router.push({ name })
     },
   },
 }
@@ -117,6 +101,13 @@ export default {
     .serve,
     .menu {
       width: 230px !important;
+    }
+
+    .title {
+      width: 230px !important;
+      p {
+        font-size: 16px !important;
+      }
     }
 
     width: 280px !important;
@@ -210,8 +201,8 @@ export default {
     .title {
       width: 60px;
       margin-left: 25px;
-      margin-bottom: 20px;
-
+      margin-bottom: 16px;
+      height: 24px;
       p {
         font-size: 14px;
         margin: 0px;
@@ -229,6 +220,7 @@ export default {
         position: relative;
         transition: 0.5s;
         border-radius: 6px;
+        cursor: pointer;
 
         &:hover {
           background: rgba(255, 255, 255, 0.1);
@@ -266,13 +258,14 @@ export default {
           width: 0px;
           height: 50px;
           display: flex;
-          justify-content: center;
+          // justify-content: center;
           align-items: center;
           transition: 0.5s;
           overflow: hidden;
           position: relative;
-          left: -20px;
+          right: -25px;
           opacity: 0;
+          word-break: keep-all;
         }
 
         .ricon {
@@ -293,9 +286,13 @@ export default {
       }
     }
 
+    .active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     .serve {
       background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
+      border-radius: 6px;
       overflow: hidden;
       transition: 0.5s;
     }

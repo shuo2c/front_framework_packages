@@ -3,7 +3,7 @@
     <!--这是布局的模板, 用于基座之间的布局-->
     <div class="cus-layout">
       <div class="left-menu">
-        <TelescopeMenu></TelescopeMenu>
+        <TelescopeMenu :menu="menuConfig"></TelescopeMenu>
         <!-- <el-menu class="el-menu-vertical" default-active="/qiankun" router>
             <el-submenu index="4">
               <template slot="title">
@@ -63,10 +63,16 @@
 import { removeLocalStorageValue } from '@/common/utils/localStorage'
 import TelescopeMenu from '@/components/menu/telescop-menu'
 import { mapGetters } from 'vuex'
+import { menuConfig } from './menu-config'
 export default {
   name: 'layout',
   components: {
     TelescopeMenu,
+  },
+  data() {
+    return {
+      menuConfig: menuConfig(),
+    }
   },
   computed: {
     ...mapGetters('account', {
