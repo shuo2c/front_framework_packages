@@ -2,7 +2,7 @@
 export function menuConfig() {
   return [
     {
-      title: 'DailyApp',
+      title: '每日常用',
       groups: [
         {
           prefixIcon: 'el-icon-paperclip',
@@ -13,23 +13,16 @@ export function menuConfig() {
         },
         {
           prefixIcon: 'el-icon-s-marketing',
-          toPath: '',
-          toName: 'home',
-          title: '资源库',
-          suffixIcon: 'el-icon-s-operation',
-        },
-        {
-          prefixIcon: 'el-icon-user',
-          toPath: '',
-          toName: 'home',
-          title: '用户展示',
+          toPath: '/knowledgeBase',
+          toName: 'knowledgeBase',
+          title: '知识库',
           suffixIcon: 'el-icon-s-operation',
         },
       ],
       darkColor: false,
     },
     {
-      title: 'FrameWork',
+      title: '前端框架',
       groups: [
         { prefixIcon: 'el-icon-paperclip', toPath: '', title: 'Vue', suffixIcon: 'el-icon-s-operation' },
         { prefixIcon: 'el-icon-s-marketing', toPath: '', title: 'React', suffixIcon: 'el-icon-s-operation' },

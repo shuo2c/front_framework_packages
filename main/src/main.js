@@ -19,6 +19,23 @@ window.$gloState = gloState
 // 取消console内的提示信息
 Vue.config.productionTip = false
 
+// markdown代码高亮
+import hljs from 'highlight.js'
+Vue.prototype.$hljs = hljs
+// 有多种样式可选，也可以到对应文件中定制化
+import 'highlight.js/styles/atom-one-dark.css'
+
+// 自定义命令v-highlight
+Vue.directive('highlight', function (el) {
+  const blocks = el.querySelectorAll('pre code')
+  blocks.forEach(block => {
+    hljs.highlightBlock(block)
+  })
+})
+//复制组件引用
+import clipboard from 'clipboard'
+Vue.prototype.clipboard = clipboard
+
 // 按需加载常用的EElement组件
 // Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 import elComponents from './config/uiframe.js'

@@ -7,12 +7,12 @@
         <div class="btn-item"></div>
       </div>
       <div class="icon">
-        <div class="icon-img">
-          <img alt="头像" :src="mmJpg" />
+        <div class="icon-img" @click="headSculptureClick">
+          <img alt="头像" :src="image || mmJpg" />
         </div>
         <div class="icon-con">
-          <p>早上好呀！</p>
-          <h2>shuo2c</h2>
+          <p>{{ motto || '春光无限，与君共知' }}</p>
+          <h2>{{ nickname || '小太阳' }}</h2>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
                 <div class="light"></div>
                 <div class="licon"><i :class="['iconfont', link.prefixIcon]"></i></div>
                 <div class="con">{{ link.title }}</div>
-                <div class="ricon"><i :class="[link.suffixIcon, 'iconfont']"></i></div>
+                <!-- <div class="ricon"><i :class="[link.suffixIcon, 'iconfont']"></i></div> -->
               </div>
             </template>
           </div>
@@ -50,6 +50,9 @@ export default {
   name: 'TelescopeMenu',
   props: {
     menu: [],
+    motto: String,
+    nickname: String,
+    image: String,
   },
   data() {
     return {
@@ -68,6 +71,10 @@ export default {
     goPages(name, path) {
       this.currentPath = path
       this.$router.push({ name })
+    },
+    // 头像点击
+    headSculptureClick() {
+      this.$emit('headSculpture')
     },
   },
 }
@@ -158,6 +165,7 @@ export default {
       display: flex;
 
       .icon-img {
+        cursor: pointer;
         width: 60px;
         height: 60px;
         box-sizing: border-box;
@@ -220,6 +228,7 @@ export default {
         position: relative;
         transition: 0.5s;
         border-radius: 6px;
+        margin-top: 2px;
         cursor: pointer;
 
         &:hover {

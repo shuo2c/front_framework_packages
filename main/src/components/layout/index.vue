@@ -4,35 +4,6 @@
     <div class="cus-layout">
       <div class="left-menu">
         <TelescopeMenu :menu="menuConfig"></TelescopeMenu>
-        <!-- <el-menu class="el-menu-vertical" default-active="/qiankun" router>
-            <el-submenu index="4">
-              <template slot="title">
-                <i class="el-icon-monitor"></i>
-                <span>主体应用</span>
-              </template>
-              <el-menu-item index="/home">书签</el-menu-item>
-              <el-menu-item index="/qiankun">乾坤</el-menu-item>
-              <el-menu-item index="/prompt">兼容界面</el-menu-item>
-            </el-submenu>
-            <el-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-reading"></i>
-                <span>Vue</span>
-              </template>
-              <el-menu-item index="/sub-vue">Vuer2.6</el-menu-item>
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-reading"></i>
-                <span>React</span>
-              </template>
-              <el-menu-item index="2-1">React</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3">
-              <i class="el-icon-menu"></i>
-              <span slot="title">Sub-Html</span>
-            </el-menu-item>
-          </el-menu> -->
       </div>
 
       <section class="container">
