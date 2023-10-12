@@ -18,3 +18,30 @@ export function getRecordList(data) {
     data,
   })
 }
+
+// 删除
+export function removeRecord(data) {
+  return request({
+    url: `/${linkApi}/record/delete`,
+    method: 'delete',
+    data,
+  })
+}
+
+// 获取详情
+export function getRecordInfo(data) {
+  return request({
+    url: `/${linkApi}/record/getEventData`,
+    method: 'get',
+    params: data,
+  })
+}
+
+// 编辑详情
+export function editEventContent(data) {
+  return request({
+    url: `/${linkApi}/record/edit`,
+    method: 'post',
+    data,
+  })
+}

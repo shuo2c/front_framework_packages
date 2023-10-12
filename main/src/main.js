@@ -29,7 +29,9 @@ import 'highlight.js/styles/atom-one-dark.css'
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach(block => {
-    hljs.highlightBlock(block)
+    if (!block.dataset.highlighted) {
+      hljs.highlightElement(block)
+    }
   })
 })
 //复制组件引用

@@ -29,6 +29,7 @@ import {
   CollapseItem,
   Dialog,
   Empty,
+  Pagination,
 } from 'element-ui'
 
 const elComponents = [
@@ -56,6 +57,7 @@ const elComponents = [
   CollapseItem,
   Dialog,
   Empty,
+  Pagination,
 ]
 
 // 注册特殊this调用组件

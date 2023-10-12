@@ -2,6 +2,7 @@
   <div class="event_dialog">
     <el-dialog
       :close-on-click-modal="false"
+      :fullscreen="fullscreen"
       :title="title"
       :visible.sync="dialogVisible"
       width="820px"
@@ -12,16 +13,18 @@
         <div class="markdown_simple">
           <el-input
             v-model="textVaue"
-            :autosize="{ minRows: 18, maxRows: 18 }"
+            :autosize="{ minRows: 18 }"
             class="textInput"
             placeholder="请输入内容"
             type="textarea"
           >
           </el-input>
-          <VueMarkdown v-highlight class="preview_markdown markdown-body" :source="textVaue"> </VueMarkdown>
+          <VueMarkdown v-highlight class="preview_markdown markdown-body" :highlight="false" :source="textVaue">
+          </VueMarkdown>
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
+        <el-button @click="changeDilogSize">{{ fullscreen ? '还原' : '全屏' }}</el-button>
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="confirmSave">确 定</el-button>
       </span>
@@ -30,7 +33,7 @@
 </template>
 
 <script>
-import { addEventContent } from '../request.js'
+import { addEventContent, editEventContent } from '../request.js'
 import VueMarkdown from 'vue-markdown'
 export default {
   components: {
@@ -41,9 +44,11 @@ export default {
       default: false,
       type: Boolean,
     },
-    title: {
-      default: '提示',
-      type: String,
+    eventDatas: {
+      default() {
+        return {}
+      },
+      type: Object,
     },
   },
   data() {
@@ -51,6 +56,8 @@ export default {
       dialogVisible: false,
       textVaue: '',
       eventTitle: '',
+      title: '新增数据',
+      fullscreen: false,
     }
   },
   watch: {
@@ -58,6 +65,18 @@ export default {
       handler(newValue) {
         this.dialogVisible = newValue
       },
+    },
+    eventDatas: {
+      handler(newValue) {
+        if (Object.keys(newValue).length > 0) {
+          this.title = '编辑数据'
+          this.eventTitle = newValue.title
+          this.textVaue = newValue.content
+        } else {
+          this.title = '新增数据'
+        }
+      },
+      deep: true,
     },
   },
   mounted() {},
@@ -71,7 +90,8 @@ export default {
     },
     // 存储数据
     confirmSave() {
-      addEventContent({ title: this.eventTitle, content: this.textVaue })
+      const func = Object.keys(this.eventDatas).length <= 0 ? addEventContent : editEventContent
+      func({ title: this.eventTitle, content: this.textVaue, id: this.eventDatas.id || '' })
         .then(() => {
           this.$emit('saveCallback')
           this.$emit('update:isShow', false)
@@ -79,6 +99,10 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    // 更改尺寸
+    changeDilogSize() {
+      this.fullscreen = !this.fullscreen
     },
   },
 }
